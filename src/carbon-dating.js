@@ -18,11 +18,13 @@ const HALF_LIFE_PERIOD = 5730;
  *
  */
 function dateSample(string) {
-
-
-
+	if (string === '' || string !== String(string) || (isNaN(string)) || (+string >= MODERN_ACTIVITY) || (+string <= 0)) return false;
+	const year = +string;
+	return Math.ceil(Math.log(MODERN_ACTIVITY / year) / (0.693 / HALF_LIFE_PERIOD));
 }
 
 module.exports = {
 	dateSample
 };
+dateSample('1');
+dateSample('WOOT!');
