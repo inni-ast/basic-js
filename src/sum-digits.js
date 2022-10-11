@@ -12,36 +12,17 @@ const { NotImplementedError } = require('../extensions/index.js');
  * For 91, the result should be 1 (9 + 1 = 10, 1 + 0 = 1)
  *
  */
-function getSumOfDigits(/*n*/) {
-	let result = 0;
-	let str = String(n);
-	let numbers = [];
-	for (let i = 0; i < str.length - 1; i++) {
-		numbers.push(+str[i]);
-	};
-	console.log(numbers);
-
-	do {
-		let res = numbers.reduce(function (a, b) {
-			return a + b;
-		}, 0);
-		result = res;
-		str = String(res);
-		numbers.length = 0;
-
-		console.log(str);
-		for (let i = 0; i < str.length - 1; i++) {
-			numbers.push(+str[i]);
-			console.log(numbers);
-		};
-
-	} while (result.length == 1)
-
-	return result;
+function getSumOfDigits(n) {
+  let str = [...String(n)];
+  while (str.length !== 1) {
+    str = [...str].map(el => Number(el));
+    str = String(str.reduce((a, b) => a + b));
+  }
+  return +str;
 }
 // npm test test/sum-digits*
 module.exports = {
-	getSumOfDigits
+  getSumOfDigits
 };
 
 // console.log(getSumOfDigits(91));
